@@ -32,16 +32,15 @@ const Form = () => {
   return (
     <form onSubmit={handleSubmit} className='mx-10'>
       <div className='bg-blue-gradient w-full h-full rounded-md p-0.5 mt-10 relative'>
-        <div className='absolute -top-4 -left-10 w-72 h-72 bg-[#33bbcf] rounded-full animate-blob1 filter blur-2xl opacity-10 animation-delay-4' />
-        <div className='absolute top-10 -right-20 w-72 h-72 bg-[#9dedf0] rounded-full animate-blob2 filter blur-2xl opacity-10' />
-        <div className='absolute -bottom-8 left-10 w-72 h-72 bg-[#def9fa] rounded-full animate-blob3 filter blur-2xl opacity-10 animation-delay-2' />
-
+        <div className='absolute -top-4 -left-10 w-72 h-72 bg-[#33bbcf] rounded-full animate-blob1 filter blur-2xl opacity-[15%] animation-delay-4' />
+        <div className='absolute top-10 -right-20 w-72 h-72 bg-[#9dedf0] rounded-full animate-blob2 filter blur-2xl opacity-[15%]' />
+        <div className='absolute -bottom-8 left-10 w-72 h-72 bg-[#def9fa] rounded-full animate-blob3 filter blur-2xl opacity-[15%] animation-delay-2' />
         <div className='bg-black rounded-md text-white grid grid-rows-7 place-items-center p-[30px]' >
-          <label for='file' className='font-poppins text-[28px]'>Image, Video or Audio: </label>
+          <label htmlFor='file' className='font-poppins text-[28px]'>Image, Video or Audio: </label>
           <p className='font-poppins text-[12px]'>File types supported: JPG, PNG, GIF, SVG, MP4, WEBM, MP3, WAV, OGG, GLB, GLTF</p>
           <div className='flex space-y-4'>
             <input type="file" required id="file" accept=".jpg, .png, .gif, .svg, .mp4, .webm, .mp3, .wav, .ogg, .glb, .gltf" class="hidden" />
-            <label for="file" class="cursor-pointer bg-black hover:bg-gray-900 text-white font-medium py-[100px] px-[150px] rounded-md border-2 border-dotted border-gray-400">
+            <label htmlFor="file" className="cursor-pointer bg-black hover:bg-gray-900 text-white font-medium py-[100px] px-[150px] rounded-md border-2 border-dotted border-gray-400">
               <img src='/upload.svg' alt='upload' className='h-20 w-20 ' />
             </label>
           </div>

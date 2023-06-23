@@ -6,6 +6,11 @@ const inter = Inter({
   subsets: ['latin'],
   display: 'swap',
 })
+
+export const metadata = {
+  title: 'NFTifyMe',
+  description: 'Mint Your Own NFT',
+}
  
 export default function RootLayout({ children }) {
   return (

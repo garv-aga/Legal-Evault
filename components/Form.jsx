@@ -39,7 +39,7 @@ const Form = () => {
           <label htmlFor='file' className='font-poppins text-[28px]'>Image, Video or Audio: </label>
           <p className='font-poppins text-[12px]'>File types supported: JPG, PNG, GIF, SVG, MP4, WEBM, MP3, WAV, OGG, GLB, GLTF</p>
           <div className='flex space-y-4'>
-            <input type="file" required id="file" accept=".jpg, .png, .gif, .svg, .mp4, .webm, .mp3, .wav, .ogg, .glb, .gltf" class="hidden" />
+            <input type="file" required id="file" accept=".jpg, .png, .gif, .svg, .mp4, .webm, .mp3, .wav, .ogg, .glb, .gltf" className="hidden" />
             <label htmlFor="file" className="cursor-pointer bg-black hover:bg-gray-900 text-white font-medium py-[100px] px-[150px] rounded-md border-2 border-dotted border-gray-400">
               <img src='/upload.svg' alt='upload' className='h-20 w-20 ' />
             </label>

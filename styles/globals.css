@@ -190,7 +190,7 @@
 }
 
 .animate-blob1 {
-  animation: blob1 30s infinite
+  animation: blob1 20s infinite
 }
 
 @keyframes blob2 {
@@ -218,7 +218,7 @@
 }
 
 .animate-blob2 {
-  animation: blob2 40s infinite
+  animation: blob2 25s infinite
 }
 
 @keyframes blob3 {
@@ -246,7 +246,7 @@
 }
 
 .animate-blob3 {
-  animation: blob3 50s infinite
+  animation: blob3 30s infinite
 }
 
 @layer utilities {

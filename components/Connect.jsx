@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import Web3 from 'web3';
+import Image from 'next/image';
 
 const Connect = () => {
   const [account, setAccount] = useState('');
@@ -19,7 +20,7 @@ const Connect = () => {
       else {
         console.log('Non-Ethereum browser detected. You should consider trying MetaMask!');
       }
-  
+
       // Get the user's selected wallet
       const accounts = await window.web3.eth.getAccounts();
       const selectedAccount = accounts[0];
@@ -29,12 +30,20 @@ const Connect = () => {
       console.error('Error connecting to MetaMask:', error);
     }
   };
-  
+
 
   return (
     <div className='font-poppins font-normal cursor-pointer text-[16px] text-black bg-blue-gradient p-2.5 rounded-md transform transition-all duration-300 hover:scale-110'>
-      {account ? <div><img src='/green.svg' alt='connected' className='rounded-full w-[15px] h-[15px] flex-1 mr-2 mb-1 ml-1'/>{account.slice(0,5)+"..."+account.slice(-4)}</div> : <button onClick={connectWallet}>Connect Wallet</button>}
+      {account ? (
+        <div className="flex items-center">
+          <Image src='/green.svg' alt='connected' width={15} height={15} className='rounded-full mr-2' />
+          <span className="mr-1 mt-1">{account.slice(0, 5)}...{account.slice(-4)}</span>
+        </div>
+      ) : (
+        <button onClick={connectWallet}>Connect Wallet</button>
+      )}
     </div>
+
   );
 };
 

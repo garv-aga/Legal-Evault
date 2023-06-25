@@ -9,18 +9,18 @@ const Navbar = () => {
 
   return (
     <nav className="flex justify-between items-center w-[89vw] max-w-screen-lg mx-auto fixed z-[6] backdrop-blur-sm">
-    <div className="flex justify-start items-center flex-shrink-0 cursor-pointer ">
-      <Image src='logo.svg' alt='logo' width={90} height={90}/>
-      <h1 className="font-normal font-poppins text-[24px] text-white leading-loose">NFTifyMe</h1>
-    </div>
-    <div>
-      <ul className="hidden sm:flex items-center gap-8">
-        <li className="font-normal font-poppins text-[16px] text-white leading-loose cursor-pointer">My Mints</li>
-        <li className="font-normal font-poppins text-[16px] text-white leading-loose cursor-pointer">How it Works?</li>
-        <li className="font-normal font-poppins text-[16px] text-white leading-loose cursor-pointer">About Us</li>
-        <Connect/>
-      </ul>
-    </div>
+      <a href="#" className="flex justify-start items-center flex-shrink-0 cursor-pointer ">
+        <Image src='logo.svg' alt='logo' width={90} height={90} />
+        <h1 className="font-normal font-poppins text-[24px] text-white leading-loose">NFTifyMe</h1>
+      </a>
+      <div>
+        <ul className="hidden sm:flex items-center">
+          <a href='/my-mints' className="font-normal font-poppins text-[16px] text-white leading-loose cursor-pointer mr-8">My Mints</a>
+          <a href='/how-it-works' className="font-normal font-poppins text-[16px] text-white leading-loose cursor-pointer mr-8">How it Works</a>
+          <a href='/about-us' className="font-normal font-poppins text-[16px] text-white leading-loose cursor-pointer mr-8">About Us</a>
+          <Connect />
+        </ul>
+      </div>
 
       <div className="sm:hidden flex flex-1 justify-end items-center">
         <Image

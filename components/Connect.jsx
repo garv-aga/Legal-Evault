@@ -32,8 +32,8 @@ const Connect = () => {
   
 
   return (
-    <div className='font-poppins font-normal cursor-pointer text-[16px] text-black bg-blue-gradient p-1.5 rounded transform transition-all duration-300 hover:scale-110'>
-      {account ? <div className='flex justify-between items-center'><img src='/green.svg' alt='connected' className='rounded-full w-[15px] h-[15px] flex-1 mr-2 mb-1 ml-1'/>{account.slice(0,5)+"..."+account.slice(-4)}</div> : <button onClick={connectWallet}>Connect Wallet</button>}
+    <div className='font-poppins font-normal cursor-pointer text-[16px] text-black bg-blue-gradient p-2.5 rounded-md transform transition-all duration-300 hover:scale-110'>
+      {account ? <div><img src='/green.svg' alt='connected' className='rounded-full w-[15px] h-[15px] flex-1 mr-2 mb-1 ml-1'/>{account.slice(0,5)+"..."+account.slice(-4)}</div> : <button onClick={connectWallet}>Connect Wallet</button>}
     </div>
   );
 };

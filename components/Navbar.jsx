@@ -2,40 +2,44 @@
 
 import { useState } from "react";
 import Connect from "./Connect";
-
+import Image from 'next/image'
 
 const Navbar = () => {
   const [toggle, setToggle] = useState(false);
 
   return (
-    <nav className="w-full flex justify-between items-center navbar">
-      <img src='/logo.svg' alt="nftifyme" className="w-[90px] h-[90px]" />
-      <h1 className={`font-poppins font-normal cursor-pointer text-[24px] text-white `}>NFTifyMe</h1>
-      <ul className="list-none sm:flex hidden justify-end items-center flex-1 font-poppins font-normal cursor-pointer text-[16px]">
-        <li className="text-white mr-10">Mint</li>
-        <li className="text-white mr-10">My Mints</li>
-        <li className="text-white mr-10">About Us</li>
+    <nav className="flex justify-between items-center w-[89vw] max-w-screen-lg mx-auto fixed z-[6] backdrop-blur-sm">
+    <div className="flex justify-start items-center flex-shrink-0 cursor-pointer ">
+      <Image src='logo.svg' alt='logo' width={90} height={90}/>
+      <h1 className="font-normal font-poppins text-[24px] text-white leading-loose">NFTifyMe</h1>
+    </div>
+    <div>
+      <ul className="hidden sm:flex items-center gap-8">
+        <li className="font-normal font-poppins text-[16px] text-white leading-loose cursor-pointer">My Mints</li>
+        <li className="font-normal font-poppins text-[16px] text-white leading-loose cursor-pointer">How it Works?</li>
+        <li className="font-normal font-poppins text-[16px] text-white leading-loose cursor-pointer">About Us</li>
         <Connect/>
       </ul>
+    </div>
 
       <div className="sm:hidden flex flex-1 justify-end items-center">
-        <img
+        <Image
           src={toggle ? '/close.svg' : 'menu.svg'}
           alt="menu"
-          className="w-[28px] h-[28px] object-contain"
+          className="object-contain"
+          width={28} height={28}
           onClick={() => setToggle(!toggle)}
         />
 
         <div
-          className={`${
-            !toggle ? "hidden" : "flex"
-          } p-6 bg-black-gradient absolute top-20 right-0 mx-4 my-2 min-w-[140px] rounded-xl sidebar`}
+          className={`${!toggle ? "hidden" : "flex"
+            } p-6 bg-black-gradient absolute top-20 right-0 mx-4 my-2 min-w-[140px] rounded-xl sidebar`}
         >
           <ul className="list-none flex justify-end items-start flex-1 flex-col">
-           <li className='font-poppins font-medium cursor-pointer text-[16px] text-white mb-4'>Mint</li>
-           <li className='font-poppins font-medium cursor-pointer text-[16px] text-white mb-4'>My Mints</li>
-           <li className='font-poppins font-medium cursor-pointer text-[16px] text-white mb-4'>About Us</li>
-           <Connect/>
+            <li className='font-poppins font-medium cursor-pointer text-[16px] text-white mb-4'>Mint</li>
+            <li className='font-poppins font-medium cursor-pointer text-[16px] text-white mb-4'>My Mints</li>
+            <li className='font-poppins font-medium cursor-pointer text-[16px] text-white mb-4'>About Us</li>
+            <Connect />
           </ul>
         </div>
       </div>

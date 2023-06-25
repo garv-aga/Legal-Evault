@@ -36,9 +36,9 @@ const Navbar = () => {
             } p-6 bg-black-gradient absolute top-20 right-0 mx-4 my-2 min-w-[140px] rounded-xl sidebar`}
         >
           <ul className="list-none flex justify-end items-start flex-1 flex-col">
-            <li className='font-poppins font-medium cursor-pointer text-[16px] text-white mb-4'>Mint</li>
-            <li className='font-poppins font-medium cursor-pointer text-[16px] text-white mb-4'>My Mints</li>
-            <li className='font-poppins font-medium cursor-pointer text-[16px] text-white mb-4'>About Us</li>
+            <a href="/my-mints" className='font-poppins font-medium cursor-pointer text-[16px] text-white mb-4'>My Mints</a>
+            <a href="/how-it-works" className='font-poppins font-medium cursor-pointer text-[16px] text-white mb-4'>How it Works</a>
+            <a href="/about-us" className='font-poppins font-medium cursor-pointer text-[16px] text-white mb-4'>About Us</a>
             <Connect />
           </ul>
         </div>

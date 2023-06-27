@@ -1,4 +1,5 @@
 "use client";
+import Image from 'next/image'
 
 import React from 'react';
 
@@ -11,7 +12,7 @@ const Form = () => {
         </h1>
       </div>
       <div>
-        <img src='/down.svg' alt="down" className='ml-2 mt-5 w-[50px] h-[50px] animate-y-axis'/>
+        <Image src='/down.svg' alt="down" width={50} height={50} className='ml-2 mt-5 animate-y-axis'/>
       </div>
     </div>
   )

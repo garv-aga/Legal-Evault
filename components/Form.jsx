@@ -1,14 +1,24 @@
+const contractABI = require('../contract-abi.json')
+const contractAddress = "0x210b7A76151d745CB7cdA4C64ab05Ef5609679E7";
+
+
 import React, { useState } from 'react';
 import Image from 'next/image';
+import FormData from 'form-data';
+import { pinFileToIPFS } from '@/utils/pinata';
+const alchemyKey = process.env.SEPOLIA_URL;
+const { createAlchemyWeb3 } = require("@alch/alchemy-web3");
+const web3 = createAlchemyWeb3(alchemyKey); 
+
 
 const Form = () => {
-  const [file, setFile] = useState(null);
+  const [selectedFile, setSelectedFile] = useState(null);
   const [name, setName] = useState('');
   const [description, setDescription] = useState('');
 
   const handleFileChange = (event) => {
     const selectedFile = event.target.files[0];
-    setFile(selectedFile);
+    setSelectedFile(selectedFile);
   };
 
   const handleNameChange = (event) => {
@@ -19,15 +29,51 @@ const Form = () => {
     setDescription(event.target.value);
   };
 
-  const handleSubmit = (event) => {
+
+  const handleSubmit = async (event) => {
     event.preventDefault();
 
-    // Perform the NFT minting logic here using the file, name, and description values
+    const formData = new FormData();
 
+    formData.append('file', selectedFile)
+
+    const metadata = JSON.stringify({
+      name: name,
+      description: description,
+    });
+    formData.append('pinataMetadata', metadata);
+
+    const options = JSON.stringify({
+      cidVersion: 0,
+    })
+    formData.append('pinataOptions', options);
+
+    const tokenURI = await pinFileToIPFS(formData);
+    //load smart contract
+    window.contract = await new web3.eth.Contract(contractABI, contractAddress);//loadContract();
+
+    const transactionParameters = {
+      to: contractAddress, // Required except during contract publications.
+      from: window.ethereum.selectedAddress, // must match user's active address.
+      'data': window.contract.methods.mintNFT(window.ethereum.selectedAddress, tokenURI).encodeABI() //make call to NFT smart contract 
+    };
+
+    try {
+      const txHash = await window.ethereum
+        .request({
+          method: 'eth_sendTransaction',
+          params: [transactionParameters],
+        });
+      console.log(txHash);
+    } catch (error) {
+      console.log(error);
+    }
     // Reset the form after submission
-    setFile(null);
+    setSelectedFile(null);
     setName('');
     setDescription('');
+
+
   };
 
   return (
@@ -40,7 +86,7 @@ const Form = () => {
           <label htmlFor='file' className='font-poppins text-[28px]'>Image, Video or Audio: </label>
           <p className='font-poppins text-[12px]'>File types supported: JPG, PNG, GIF, SVG, MP4, WEBM, MP3, WAV, OGG, GLB, GLTF</p>
           <div className='flex space-y-4'>
-            <input type="file" required id="file" accept=".jpg, .png, .gif, .svg, .mp4, .webm, .mp3, .wav, .ogg, .glb, .gltf" className="hidden" />
+            <input type="file" required id="file" accept=".jpg, .png, .gif, .svg, .mp4, .webm, .mp3, .wav, .ogg, .glb, .gltf" className="hidden" onChange={handleFileChange} />
             <label htmlFor="file" className="cursor-pointer bg-black hover:bg-gray-900 text-white font-medium py-[100px] px-[10vw] rounded-md border-2 border-dotted border-gray-400 sm:px-[13vw] ss:px-[15vw] xs:px-[20vw] xxs:px-[25vw]">
               <Image src='/upload.svg' alt='upload' width={80} height={80} />
             </label>

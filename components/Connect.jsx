@@ -1,47 +1,56 @@
-import React, { useState } from 'react';
-import Web3 from 'web3';
-import Image from 'next/image';
+import { useState, useEffect } from "react";
+import { connectWallet, getCurrentWalletConnected } from "@/utils/interact";
+import Image from 'next/image'
 
 const Connect = () => {
-  const [account, setAccount] = useState('');
+  const [walletAddress, setWallet] = useState("");
 
-  const connectWallet = async () => {
-    try {
-      // Modern dapp browsers
-      if (window.ethereum) {
-        window.web3 = new Web3(window.ethereum);
-        await window.ethereum.request({ method: 'eth_requestAccounts' });
-      }
-      // Legacy dapp browsers
-      else if (window.web3) {
-        window.web3 = new Web3(window.web3.currentProvider);
-      }
-      // Non-dapp browsers
-      else {
-        console.log('Non-Ethereum browser detected. You should consider trying MetaMask!');
-      }
+  function addWalletListener() {
+    if (window.ethereum) {
+      window.ethereum.on("accountsChanged", (accounts) => {
+        if (accounts.length > 0) {
+          setWallet(accounts[0]);
 
-      // Get the user's selected wallet
-      const accounts = await window.web3.eth.getAccounts();
-      const selectedAccount = accounts[0];
+        } else {
+          setWallet("");
 
-      setAccount(selectedAccount);
-    } catch (error) {
-      console.error('Error connecting to MetaMask:', error);
+        }
+      });
+    } 
+  }
+
+  useEffect(() => {
+    async function fetchData() {
+      const { address } = await getCurrentWalletConnected();
+      setWallet(address);
+
+  
+      addWalletListener();
     }
-  };
+  
+    fetchData();
+  }, []);
+  
 
+  const connectWalletPressed = async () => {
+    const walletResponse = await connectWallet();
+
+    setWallet(walletResponse.address);
+  };
 
   return (
     <div className='font-poppins font-normal cursor-pointer text-[16px] text-black bg-blue-gradient p-2.5 rounded-md transform transition-all duration-300 hover:scale-110'>
-      {account ? (
+      {walletAddress.length > 0 ? (
         <div className="flex items-center">
           <Image src='/green.svg' alt='connected' width={15} height={15} className='rounded-full mr-2' />
-          <span className="mr-1 mt-1">{account.slice(0, 5)}...{account.slice(-4)}</span>
+          <span className="mr-1 mt-1">{String(walletAddress).substring(0, 6) +
+            "..." +
+            String(walletAddress).substring(38)}</span>
         </div>
       ) : (
-        <button onClick={connectWallet}>Connect Wallet</button>
+        <button onClick={connectWalletPressed}>Connect Wallet</button>
       )}
+  
     </div>
 
   );

@@ -6,7 +6,7 @@ import React, { useState } from 'react';
 import Image from 'next/image';
 import FormData from 'form-data';
 import { pinFileToIPFS } from '@/utils/pinata';
-const alchemyKey = process.env.SEPOLIA_URL;
+const alchemyKey = 'https://eth-sepolia.g.alchemy.com/v2/athK8lzu9-M9WWOpke3jXC_qWSz32fLq';
 const { createAlchemyWeb3 } = require("@alch/alchemy-web3");
 const web3 = createAlchemyWeb3(alchemyKey); 
 
